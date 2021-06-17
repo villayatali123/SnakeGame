@@ -61,19 +61,19 @@ function gameEngine()
         score=0;
     }
     // This part is to make wall transmisable
-    if(snakeArr[0].x>=18)
+    if(snakeArr[0].x>18)
     {
         snakeArr[0].x=0;
     }
-    else if(snakeArr[0].x<=0)
+    else if(snakeArr[0].x<0)
     {
         snakeArr[0].x=18;
     }
-    if(snakeArr[0].y>=18)
+    if(snakeArr[0].y>18)
     {
         snakeArr[0].y=0;
     }
-    else if(snakeArr[0].y<=0)
+    else if(snakeArr[0].y<0)
     {
         snakeArr[0].y=18;
     }
@@ -90,11 +90,23 @@ function gameEngine()
         food={x:Math.round(a+(b-a)*Math.random()),y:Math.round(a+(b-a)*Math.random())};
     }
     //Moving The Snake
-    for (let i = snakeArr.length-2; i>=0 ;i--) {
-        const element = snakeArr[i];
-        snakeArr[i+1]={...snakeArr[i]};
+    // for (let i = snakeArr.length-2; i>0 ;i--) {
+    //     const element = snakeArr[i];
+    //     snakeArr[i-1]={...snakeArr[i]};
+    // }
+    let prevX=snakeArr[0].x;
+    let prevY=snakeArr[0].y;
+    let prev2X;
+    let prev2Y;
+    for(let i=1;i<snakeArr.length;i++)
+    {
+        prev2X=snakeArr[i].x;
+        prev2Y=snakeArr[i].y;
+        snakeArr[i].x=prevX;
+        snakeArr[i].y=prevY;
+        prevX=prev2X;
+        prevY=prev2Y;
     }
-     
     snakeArr[0].x+=inputDir.x;
     snakeArr[0].y+=inputDir.y;
 
